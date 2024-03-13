@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "channels",
+  "info": {
+    "singularName": "channel",
+    "pluralName": "channels",
+    "displayName": "channel"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "linkPath": {
+      "type": "string"
+    },
+    "folderName": {
+      "type": "string"
+    },
+    "pubDate": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "imageWidth": {
+      "type": "string"
+    },
+    "imageHeight": {
+      "type": "string"
+    },
+    "interval": {
+      "type": "string"
+    },
+    "desktopNotification": {
+      "type": "string"
+    },
+    "soundNotification": {
+      "type": "string"
+    },
+    "folder_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-folder.user-folder"
+    }
+  }
+}

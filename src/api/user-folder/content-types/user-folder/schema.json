@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_folders",
+  "info": {
+    "singularName": "user-folder",
+    "pluralName": "user-folders",
+    "displayName": "User_folder",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "inactive",
+        "delete"
+      ],
+      "default": "active"
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

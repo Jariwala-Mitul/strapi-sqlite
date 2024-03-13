@@ -362,32 +362,84 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiRestaurantRestaurant extends Schema.CollectionType {
-  collectionName: 'restaurants';
+export interface ApiChannelChannel extends Schema.CollectionType {
+  collectionName: 'channels';
   info: {
-    singularName: 'restaurant';
-    pluralName: 'restaurants';
-    displayName: 'Restaurant';
+    singularName: 'channel';
+    pluralName: 'channels';
+    displayName: 'channel';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
-    address: Attribute.String;
-    status: Attribute.Enumeration<['active', 'inactive', 'delete']> &
-      Attribute.DefaultTo<'active'>;
+    title: Attribute.String;
+    description: Attribute.String;
+    link: Attribute.String;
+    linkPath: Attribute.String;
+    folderName: Attribute.String;
+    pubDate: Attribute.String;
+    image: Attribute.String;
+    imageWidth: Attribute.String;
+    imageHeight: Attribute.String;
+    interval: Attribute.String;
+    desktopNotification: Attribute.String;
+    soundNotification: Attribute.String;
+    folder_id: Attribute.Relation<
+      'api::channel.channel',
+      'oneToOne',
+      'api::user-folder.user-folder'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::restaurant.restaurant',
+      'api::channel.channel',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::restaurant.restaurant',
+      'api::channel.channel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUserFolderUserFolder extends Schema.CollectionType {
+  collectionName: 'user_folders';
+  info: {
+    singularName: 'user-folder';
+    pluralName: 'user-folders';
+    displayName: 'User_folder';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    status: Attribute.Enumeration<['active', 'inactive', 'delete']> &
+      Attribute.DefaultTo<'active'>;
+    user_id: Attribute.Relation<
+      'api::user-folder.user-folder',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-folder.user-folder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-folder.user-folder',
       'oneToOne',
       'admin::user'
     > &
@@ -814,7 +866,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -870,7 +921,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::restaurant.restaurant': ApiRestaurantRestaurant;
+      'api::channel.channel': ApiChannelChannel;
+      'api::user-folder.user-folder': ApiUserFolderUserFolder;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
