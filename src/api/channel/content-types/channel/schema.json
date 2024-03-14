@@ -4,7 +4,8 @@
   "info": {
     "singularName": "channel",
     "pluralName": "channels",
-    "displayName": "channel"
+    "displayName": "channel",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,10 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "description": {
       "type": "string"
@@ -24,9 +27,6 @@
       "type": "string"
     },
     "linkPath": {
-      "type": "string"
-    },
-    "folderName": {
       "type": "string"
     },
     "pubDate": {
@@ -45,15 +45,32 @@
       "type": "string"
     },
     "desktopNotification": {
-      "type": "string"
+      "type": "boolean"
     },
     "soundNotification": {
-      "type": "string"
+      "type": "boolean"
+    },
+    "itemsData": {
+      "type": "json"
     },
     "folder_id": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::user-folder.user-folder"
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "inactive",
+        "delete"
+      ],
+      "default": "active"
     }
   }
 }

@@ -368,6 +368,7 @@ export interface ApiChannelChannel extends Schema.CollectionType {
     singularName: 'channel';
     pluralName: 'channels';
     displayName: 'channel';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -378,19 +379,26 @@ export interface ApiChannelChannel extends Schema.CollectionType {
     description: Attribute.String;
     link: Attribute.String;
     linkPath: Attribute.String;
-    folderName: Attribute.String;
     pubDate: Attribute.String;
     image: Attribute.String;
     imageWidth: Attribute.String;
     imageHeight: Attribute.String;
     interval: Attribute.String;
-    desktopNotification: Attribute.String;
-    soundNotification: Attribute.String;
+    desktopNotification: Attribute.Boolean;
+    soundNotification: Attribute.Boolean;
+    itemsData: Attribute.JSON;
     folder_id: Attribute.Relation<
       'api::channel.channel',
       'oneToOne',
       'api::user-folder.user-folder'
     >;
+    user_id: Attribute.Relation<
+      'api::channel.channel',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    status: Attribute.Enumeration<['active', 'inactive', 'delete']> &
+      Attribute.DefaultTo<'active'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
